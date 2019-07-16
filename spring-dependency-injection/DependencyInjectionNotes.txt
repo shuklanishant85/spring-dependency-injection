@@ -1,0 +1,26 @@
+USE CASE:
+we want to send email message and twitter message to the users.For dependency injection, we need to have a base class for the services.
+So I have MessageService interface with single method declaration for sending message.
+
+@Component annotation is added to the class, so that when Spring framework will scan for the components, this class will be treated as component. @Component annotation can be applied only to the class and it’s retention policy is Runtime.
+
+@Autowired annotation is used to let Spring know that autowiring is required. This can be applied to field, constructor and methods. This annotation allows us to implement constructor-based, field-based or method-based dependency injection in our components.
+
+For annotation based configuration, we need to write a Configurator class that will be used to inject the actual implementation bean to the component property.
+
+@Configuration annotation is used to let Spring know that it’s a Configuration class.
+
+@ComponentScan annotation is used with @Configuration annotation to specify the packages to look for Component classes.
+
+@Bean annotation is used to let Spring framework know that this method should be used to get the bean implementation to inject in Component classes.
+
+AnnotationConfigApplicationContext is the implementation of AbstractApplicationContext abstract class and it’s used for autowiring the services to components when annotations are used.
+
+ClassPathXmlApplicationContext is used to get the ApplicationContext object by providing the configuration files location. It has multiple overloaded constructors and we can provide multiple config files also.
+
+Google Guice is one of the leading frameworks whose main work is to provide automatic implementation of dependency injection. 
+Google Guice 3.0 added the support for JSR-330 and we can use annotations from com.google.inject or javax.inject package.
+The @Inject annotation is used by Google Guice to inject the service implementation class. 
+Obviously google guice will not know which service to use, we have to configure it by extending AbstractModule abstract class and provide implementation for configure() method. We can bind any of the implementation to service class. For example, if we want to change to EmailService we would just need to change the bindings.
+
+We need to create Injector object using Guice class createInjector() method where we pass our injector class implementation object. Then we use injector to initialize our consumer class.

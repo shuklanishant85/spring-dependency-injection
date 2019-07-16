@@ -1,0 +1,32 @@
+SPRING IOC CONTAINER:
+Spring IoC container classes are part of org.springframework.beans and org.springframework.context packages. Spring IoC container provides us different ways to decouple the object dependencies.
+BeanFactory is the root interface of Spring IoC container. ApplicationContext is the child interface of BeanFactory interface that provide Spring AOP features, i18n etc.
+
+Some of the useful child-interfaces of ApplicationContext are ConfigurableApplicationContext and WebApplicationContext. Spring Framework provides a number of useful ApplicationContext implementation classes that we can use to get the spring context and then the Spring Bean:
+ -> AnnotationConfigApplicationContext
+ -> ClassPathXmlApplicationContext
+ -> FileSystemXmlApplicationContext
+ -> AnnotationConfigWebApplicationContext
+ -> XmlWebApplicationContext 
+ 
+Differences between initialisaion on applicationContext in MVC and standalone app:-
+Usually, if you are working on Spring MVC application and your application is configured to use Spring Framework, Spring IoC container gets initialized when the application starts and when a bean is requested, the dependencies are injected automatically.
+However, for a standalone application, you need to initialize the container somewhere in the application and then use it to get the spring beans.
+
+Spring Bean Scopes:-
+ -> singleton : This is the default scope for the spring beans. While using this scope, make sure bean doesn’t have shared instance variables 
+				otherwise it might lead to data inconsistency issues.
+ -> prototype : A new instance will be created every time the bean is requested.
+ -> request :  This is same as prototype scope, however it’s meant to be used for web applications. A new instance of the bean will be created 
+				for each HTTP request.
+ -> session : A new bean will be created for each HTTP session by the container.
+ -> global :  This is used to create global session beans for Portlet applications.
+ 
+ Spring Framework is extendable and we can create our own scopes too. However, most of the times we are good with the scopes provided by the framework.
+ 
+ Spring Framework provides three ways to configure beans to be used in the application:
+  -> Annotation Based Configuration – By using @Service or @Component annotations. Scope details can be provided with @Scope annotation.
+  -> XML Based Configuration – By creating Spring Configuration XML file to configure the beans. If you are using Spring MVC framework, the xml based 
+								configuration can be loaded automatically by writing some boiler plate code in web.xml file.
+  -> Java Based Configuration – Starting from Spring 3.0, we can configure Spring beans using java programs. Some important annotations used for java based 
+								configuration are @Configuration, @ComponentScan and @Bean.
